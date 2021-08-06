@@ -36,10 +36,12 @@ public class SecondsLimiter implements Runnable, Serializable {
         this.timeStop = 0;
     }
 
+    //Обновляем мейн при использовании бандл
     public void setMain(Updating main) {
         this.main = main;
     }
 
+    //Полцчаем строковое преставление времени со старта
     private String getString() {
 
         long second = time % 60;
