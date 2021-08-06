@@ -8,8 +8,10 @@ import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+//Класс который подсчитывает время
+
 @RequiresApi(api = Build.VERSION_CODES.O)
-public class SecondsLimiter implements Runnable, Timering, Serializable {
+public class SecondsLimiter implements Runnable, Serializable {
 
     public static final String CLASS_NAME = "CLASS_SECOND_LIMITER";
 
@@ -61,7 +63,6 @@ public class SecondsLimiter implements Runnable, Timering, Serializable {
         }
     }
 
-    @Override
     public void stop() {
 
         if (this.status) {
@@ -70,17 +71,14 @@ public class SecondsLimiter implements Runnable, Timering, Serializable {
         }
     }
 
-    @Override
     public void start() {
 
-        this.localDateTime = LocalDateTime.now();
-
         if (!this.status) {
+            this.localDateTime = LocalDateTime.now();
             this.status = true;
         }
     }
 
-    @Override
     public void reset() {
 
         this.time = 0;

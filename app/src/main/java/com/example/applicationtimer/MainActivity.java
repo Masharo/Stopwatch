@@ -25,16 +25,24 @@ public class MainActivity extends AppCompatActivity implements Updating {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        secondsLimiter = savedInstanceState == null ? new SecondsLimiter() :
-                (SecondsLimiter) savedInstanceState.getSerializable(SecondsLimiter.CLASS_NAME);
+        secondsLimiter = new SecondsLimiter();
 
         secondsLimiter.setMain(this);
 
+        //isStatus = savedInstanceState != null && savedInstanceState.getBoolean(STATUS_NAME);
+        //Код перенесен в onRestoreInstanceState так же для secondLimiter
         isStatus = savedInstanceState != null && savedInstanceState.getBoolean(STATUS_NAME);
         timeView = findViewById(R.id.text_time);
 
         handler = new Handler();
         handler.post(secondsLimiter);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        secondsLimiter = (SecondsLimiter) savedInstanceState.getSerializable(SecondsLimiter.CLASS_NAME);
+        isStatus = savedInstanceState.getBoolean(STATUS_NAME);
     }
 
     @Override
